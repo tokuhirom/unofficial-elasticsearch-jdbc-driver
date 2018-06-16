@@ -21,6 +21,7 @@ public class UESPreparedStatement implements PreparedStatement {
     private final OkHttpClient client;
     private final ObjectMapper objectMapper;
     private final String sql;
+    private boolean closed;
 
     public UESPreparedStatement(String httpUrl, OkHttpClient client, ObjectMapper objectMapper, String sql) {
         this.httpUrl = httpUrl;
@@ -56,7 +57,7 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public int executeUpdate() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -161,7 +162,7 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public boolean execute() throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -196,7 +197,8 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public ResultSetMetaData getMetaData() throws SQLException {
-        return null;
+        // TODO
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -226,7 +228,7 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public ParameterMetaData getParameterMetaData() throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -326,62 +328,63 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        return null;
+        return new UESPreparedStatement(httpUrl, client, objectMapper, sql)
+                .executeQuery();
     }
 
     @Override
     public int executeUpdate(String sql) throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void close() throws SQLException {
-
+        this.closed = true;
     }
 
     @Override
     public int getMaxFieldSize() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setMaxFieldSize(int max) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getMaxRows() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setMaxRows(int max) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setEscapeProcessing(boolean enable) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getQueryTimeout() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setQueryTimeout(int seconds) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void cancel() throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public SQLWarning getWarnings() throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -391,132 +394,134 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public void setCursorName(String name) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean execute(String sql) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ResultSet getResultSet() throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getUpdateCount() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean getMoreResults() throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setFetchDirection(int direction) throws SQLException {
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setFetchSize(int rows) throws SQLException {
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public int getFetchSize() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getResultSetConcurrency() throws SQLException {
-        return 0;
+        return ResultSet.CONCUR_READ_ONLY;
     }
 
     @Override
     public int getResultSetType() throws SQLException {
-        return 0;
+        return ResultSet.TYPE_FORWARD_ONLY;
     }
 
     @Override
     public void addBatch(String sql) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void clearBatch() throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int[] executeBatch() throws SQLException {
-        return new int[0];
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Connection getConnection() throws SQLException {
-        return null;
+        return this.connection;
     }
 
     @Override
     public boolean getMoreResults(int current) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public ResultSet getGeneratedKeys() throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int executeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int executeUpdate(String sql, int[] columnIndexes) throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int executeUpdate(String sql, String[] columnNames) throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean execute(String sql, int autoGeneratedKeys) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean execute(String sql, int[] columnIndexes) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean execute(String sql, String[] columnNames) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getResultSetHoldability() throws SQLException {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isClosed() throws SQLException {
-        return false;
+        return closed;
     }
 
     @Override
     public void setPoolable(boolean poolable) throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -526,21 +531,21 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public void closeOnCompletion() throws SQLException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isCloseOnCompletion() throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
-        return false;
+        throw new UnsupportedOperationException();
     }
 }

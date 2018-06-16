@@ -15,6 +15,7 @@ public class UESConnection implements Connection {
     private final String httpUrl;
     private final OkHttpClient client;
     private final ObjectMapper objectMapper;
+    private boolean closed;
 
     public UESConnection(String url, Properties info) {
         // jdbc:ues:localhost:9200
@@ -71,12 +72,12 @@ public class UESConnection implements Connection {
 
     @Override
     public void close() throws SQLException {
-
+        this.closed = true;
     }
 
     @Override
     public boolean isClosed() throws SQLException {
-        return false;
+        return closed;
     }
 
     @Override
