@@ -17,13 +17,15 @@ import java.util.Calendar;
 public class UESPreparedStatement implements PreparedStatement {
     public static final MediaType JSON
             = MediaType.parse("application/json");
+    private final UESConnection connection;
     private final String httpUrl;
     private final OkHttpClient client;
     private final ObjectMapper objectMapper;
     private final String sql;
     private boolean closed;
 
-    public UESPreparedStatement(String httpUrl, OkHttpClient client, ObjectMapper objectMapper, String sql) {
+    public UESPreparedStatement(UESConnection connection, String httpUrl, OkHttpClient client, ObjectMapper objectMapper, String sql) {
+        this.connection = connection;
         this.httpUrl = httpUrl;
         this.client = client;
         this.objectMapper = objectMapper;
@@ -328,7 +330,7 @@ public class UESPreparedStatement implements PreparedStatement {
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        return new UESPreparedStatement(httpUrl, client, objectMapper, sql)
+        return new UESPreparedStatement(connection, httpUrl, client, objectMapper, sql)
                 .executeQuery();
     }
 

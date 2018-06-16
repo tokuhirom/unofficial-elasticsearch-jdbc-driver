@@ -37,7 +37,7 @@ public class UESConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return new UESPreparedStatement(this.httpUrl, this.client, this.objectMapper, sql);
+        return new UESPreparedStatement(this, this.httpUrl, this.client, this.objectMapper, sql);
     }
 
     @Override
