@@ -1,5 +1,15 @@
 unofficial elasticsearch jdbc driver, based on elasticsearch 6.3+'s rest api.
 
+# Synopsis
+
+    Connection connection = DriverManager.getConnection("jdbc:ues:localhost:9200");
+    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM library WHERE release_date < '2000-01-01' order by name");
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+        System.out.println(resultSet.getString("name"));
+    }
+
+
 # license
 
     The MIT License (MIT)
